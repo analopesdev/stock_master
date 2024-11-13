@@ -19,6 +19,7 @@ defmodule StockMaster.Accounts.User do
     |> cast(attrs, [:name, :email, :password, :role, :active])
     |> validate_required([:name, :email, :password])
     |> validate_length(:password, min: 6)
+    |> unique_constraint(:email)
     |> put_password_hash()
   end
 

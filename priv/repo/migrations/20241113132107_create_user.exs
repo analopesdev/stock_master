@@ -14,9 +14,12 @@ defmodule StockMaster.Repo.Migrations.CreateUser do
 
       timestamps()
     end
+
+    create unique_index(:user, [:email])
   end
 
   def down do
+    drop index(:user, [:email])
     drop table(:user)
     execute "DROP TYPE IF EXISTS user_role"
   end
