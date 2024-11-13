@@ -1,16 +1,36 @@
-services:
-  db:
-    image: postgres:13
-    container_name: postgres
-    environment:
-      POSTGRES_USER: postgres        
-      POSTGRES_PASSWORD: postgres   
-      POSTGRES_DB: stock_master_dev        
-    ports:
-      - "5432:5432"  
-    volumes:
-      - postgres_data:/var/lib/postgresql/data 
+version: '3'
 
+services:
+  postgres:
+    image: postgres:13
+    container_name: stock_master_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: stock_master_db
+    ports:
+      - "5432:5432" 
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - stock_master_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: stock_master_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com  
+      PGADMIN_DEFAULT_PASSWORD: admin_password  
+    ports:
+      - "8080:80" 
+    depends_on:
+      - postgres
+    networks:
+      - stock_master_network
+    
 volumes:
   postgres_data:
-    driver: local
+
+networks:
+  stock_master_network:
+    driver: bridge

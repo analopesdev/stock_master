@@ -11,7 +11,7 @@ config :stock_master,
   ecto_repos: [StockMaster.Repo],
   generators: [timestamp_type: :utc_datetime]
 
-config :your_app, StockMaster.Repo, migration_primary_key: [type: :uuid]
+config :stock_master, StockMaster.Repo, migration_primary_key: [type: :uuid]
 
 # Configures the endpoint
 config :stock_master, StockMasterWeb.Endpoint,
