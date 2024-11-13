@@ -66,7 +66,7 @@ config :tailwind,
   ]
 
 # Configures Swagger
-config :my_app, :phoenix_swagger,
+config :stock_master, :phoenix_swagger,
   swagger_files: %{
     "priv/static/swagger.json" => [
       router: StockMasterWeb.Router,
