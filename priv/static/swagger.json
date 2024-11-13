@@ -1,0 +1,69 @@
+{
+  "definitions": {
+    "User": {
+      "description": "A user of the application",
+      "properties": {
+        "active": {
+          "default": true,
+          "description": "If the user is active",
+          "type": "boolean"
+        },
+        "address": {
+          "description": "Home address",
+          "type": "string"
+        },
+        "id": {
+          "description": "Unique identifier",
+          "type": "string"
+        },
+        "name": {
+          "description": "Users name",
+          "type": "string"
+        },
+        "role": {
+          "description": "User role (admin/user)",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "id"
+      ],
+      "title": "User",
+      "type": "object"
+    }
+  },
+  "host": "localhost:4000",
+  "info": {
+    "title": "Stock Master",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/v1/users": {
+      "post": {
+        "description": "Create User",
+        "operationId": "StockMasterWeb.UserController.create",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Client Error"
+          },
+          "500": {
+            "description": "Client Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Users"
+        ]
+      }
+    }
+  },
+  "swagger": "2.0"
+}

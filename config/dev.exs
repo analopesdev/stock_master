@@ -63,6 +63,16 @@ config :stock_master, StockMasterWeb.Endpoint,
     ]
   ]
 
+config :stock_master, :phoenix_swagger,
+  swagger_files: %{
+    "priv/static/swagger.json" => [
+      router: StockMasterWeb.Router,
+      endpoint: StockMasterWeb.Endpoint
+    ]
+  }
+
+config :phoenix_swagger, json_library: Jason
+
 # Enable dev routes for dashboard and mailbox
 config :stock_master, dev_routes: true
 

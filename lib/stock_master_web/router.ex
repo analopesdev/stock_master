@@ -20,6 +20,26 @@ defmodule StockMasterWeb.Router do
     get "/", PageController, :home
   end
 
+  scope "/api" do
+    forward "/swagger", PhoenixSwagger.Plug.SwaggerUI,
+      otp_app: :stock_master,
+      swagger_file: "swagger.json"
+  end
+
+  scope "/api/v1", StockMasterWeb do
+    pipe_through :api
+    resources "/users", UserController, except: [:new, :edit]
+  end
+
+  def swagger_info do
+    %{
+      info: %{
+        version: "1.0",
+        title: "Stock Master"
+      }
+    }
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", StockMasterWeb do
   #   pipe_through :api

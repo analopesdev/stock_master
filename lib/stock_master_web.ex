@@ -49,6 +49,16 @@ defmodule StockMasterWeb do
     end
   end
 
+  def view do
+    quote do
+      use Phoenix.View,
+        root: "lib/stock_master_web/templates",
+        namespace: StockMasterWeb
+
+      import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
+    end
+  end
+
   def live_view do
     quote do
       use Phoenix.LiveView,

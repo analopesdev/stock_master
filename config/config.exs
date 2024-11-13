@@ -22,7 +22,17 @@ config :stock_master, StockMasterWeb.Endpoint,
     layout: false
   ],
   pubsub_server: StockMaster.PubSub,
-  live_view: [signing_salt: "4J4oCyL8"]
+  live_view: [signing_salt: "4J4oCyL8"],
+  live_reload: [
+    patterns: [
+      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg|json)$},
+      ~r{priv/gettext/.*(po)$},
+      ~r{lib/your_app_web/views/.*(ex)$},
+      ~r{lib/your_app_web/controllers/.*(ex)$},
+      ~r{lib/your_app_web/templates/.*(eex)$}
+    ]
+  ],
+  reloadable_compilers: [:gettext, :phoenix, :elixir, :phoenix_swagger]
 
 # Configures the mailer
 #
@@ -55,13 +65,23 @@ config :tailwind,
     cd: Path.expand("../assets", __DIR__)
   ]
 
+# Configures Swagger
+config :my_app, :phoenix_swagger,
+  swagger_files: %{
+    "priv/static/swagger.json" => [
+      router: StockMasterWeb.Router,
+      endpoint: StockMasterWeb.Endpoint
+    ]
+  }
+
+config :phoenix, :json_library, Jason
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
 # Use Jason for JSON parsing in Phoenix
-config :phoenix, :json_library, Jason
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

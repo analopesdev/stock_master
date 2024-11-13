@@ -7,6 +7,7 @@ defmodule StockMaster.Repo.Migrations.CreateUser do
     create table(:user, primary_key: false) do
       add :id, :uuid, primary_key: true, default: fragment("gen_random_uuid()")
       add :name, :string, size: 255
+      add :email, :string, size: 255
       add :password_hash, :string, size: 255
       add :role, :user_role, default: "user"
       add :active, :boolean, default: true
