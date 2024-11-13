@@ -8,16 +8,12 @@
           "description": "If the user is active",
           "type": "boolean"
         },
-        "address": {
-          "description": "Home address",
-          "type": "string"
-        },
-        "id": {
-          "description": "Unique identifier",
+        "email": {
+          "description": "User email",
           "type": "string"
         },
         "name": {
-          "description": "Users name",
+          "description": "User name",
           "type": "string"
         },
         "role": {
@@ -26,8 +22,8 @@
         }
       },
       "required": [
-        "name",
-        "id"
+        "email",
+        "name"
       ],
       "title": "User",
       "type": "object"
@@ -40,12 +36,113 @@
   },
   "paths": {
     "/api/v1/users": {
+      "get": {
+        "description": "List Users",
+        "operationId": "StockMasterWeb.UserController.index",
+        "parameters": [],
+        "responses": {
+          "400": {
+            "description": "Client Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "User"
+        ]
+      },
       "post": {
         "description": "Create User",
         "operationId": "StockMasterWeb.UserController.create",
         "parameters": [],
         "responses": {
-          "200": {
+          "201": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Client Error"
+          },
+          "500": {
+            "description": "Client Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/api/v1/users/{id}": {
+      "delete": {
+        "description": "Delete a User",
+        "operationId": "StockMasterWeb.UserController.delete",
+        "parameters": [
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Client Error"
+          },
+          "500": {
+            "description": "Client Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Users"
+        ]
+      },
+      "get": {
+        "description": "Get a User to Edit",
+        "operationId": "StockMasterWeb.UserController.show",
+        "parameters": [
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Client Error"
+          },
+          "500": {
+            "description": "Client Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Users"
+        ]
+      },
+      "put": {
+        "description": "Delete a User",
+        "operationId": "StockMasterWeb.UserController.update",
+        "parameters": [],
+        "responses": {
+          "204": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/User"

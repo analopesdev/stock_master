@@ -28,7 +28,7 @@ defmodule StockMasterWeb.Router do
 
   scope "/api/v1", StockMasterWeb do
     pipe_through :api
-    resources "/users", UserController, except: [:new, :edit]
+    resources "/users", UserController
   end
 
   def swagger_info do
@@ -39,6 +39,16 @@ defmodule StockMasterWeb.Router do
       }
     }
   end
+
+  # Defines "RESTful" routes for a resource.
+  # GET /users => :index
+  # GET /users/new => :new
+  # POST /users => :create
+  # GET /users/:id => :show
+  # GET /users/:id/edit => :edit
+  # PATCH /users/:id => :update
+  # PUT /users/:id => :update
+  # DELETE /users/:id => :delete
 
   # Other scopes may use custom stacks.
   # scope "/api", StockMasterWeb do

@@ -23,10 +23,19 @@ defmodule StockMaster.Accounts.User do
     |> put_password_hash()
   end
 
-  defp put_password_hash(changeset) do
-    case get_change(changeset, :password) do
-      nil -> changeset
-      password -> put_change(changeset, :password_hash, Argon2.hash_pwd_salt(password))
+  def update_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:name, :email, :role, :active, :password])
+    |> validate_length(:password, min: 6)
+    |> unique_constraint(:email)
+    |> put_password_hash(attrs)
+  end
+
+  defp put_password_hash(changeset, attrs \\ %{}) do
+    if Map.get(attrs, :password) do
+      change(changeset, password_hash: Bcrypt.hash_pwd_salt(attrs[:password]))
+    else
+      changeset
     end
   end
 end
