@@ -4,6 +4,7 @@ defmodule StockMasterWeb.UserController do
 
   swagger_path :index do
     get("/api/v1/users")
+    tag("Users")
     description("List Users")
     response(400, "Client Error")
   end
@@ -82,8 +83,6 @@ defmodule StockMasterWeb.UserController do
   end
 
   def update(conn, params) do
-    IO.inspect(params)
-
     case StockMaster.Accounts.update_user(params) do
       {:ok, user} ->
         conn
